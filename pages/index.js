@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import Widget from '../src/components/Widget';
-import { QuizContainer } from '../styles/pages/home';
+import QuizContainer from '../src/components/QuizContainer';
 import Input from '../src/components/Input';
 import Button from '../src/components/Button';
 import QuizLogo from '../src/components/QuizLogo';

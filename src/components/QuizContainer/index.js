@@ -1,12 +1,4 @@
 import styled from 'styled-components';
-import db from '../../db.json';
-
-const Background = styled.div`
-  flex: 1;
-  background-image: url(${db.bg});
-  background-size: cover;
-  background-position: center;
-`;
 
 const QuizContainer = styled.div`
   width: 100%;
@@ -19,7 +11,4 @@ const QuizContainer = styled.div`
   }
 `;
 
-export {
-    Background,
-    QuizContainer
-};
+export default QuizContainer;
