@@ -7,19 +7,19 @@
       "image": "https://mk0uniespiritoja3w06.kinstacdn.com/wp-content/uploads/2017/11/p6.jpg",
       "title": "Qual o endereço de Holmes e Watson?",
       "description": "Essa é pra aquecer",
-      "answer": 1,
+      "answer": 3,
       "alternatives": [
         "Rua Baker 21B",
-        "Rua Baker 221B",
         "Rua Baker 21",
-        "Rua Baker 121B"
+        "Rua Baker 121B",
+        "Rua Baker 221B"
       ]
     },
     {
       "image": "https://uploads.jovemnerd.com.br/wp-content/uploads/2017/01/moriarty.jpg",
       "title": "Moriarty está mesmo vivo?",
       "description": "Essa é difícil",
-      "answer": 0,
+      "answer": 1,
       "alternatives": [
         "Sim",
         "Não"

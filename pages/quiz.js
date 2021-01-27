@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 /* eslint-disable react/jsx-indent */
-import React from 'react';
+import React, { useState } from 'react';
 import db from '../db.json';
 import Widget from '../src/components/Widget';
 import QuizLogo from '../src/components/QuizLogo';
@@ -16,19 +16,23 @@ function LoadingWidget() {
             </Widget.Header>
 
             <Widget.Content>
-                [Desafio do Loading]
+                Aguarde o carregamento
             </Widget.Content>
         </Widget>
     );
 }
+
+let contCorrects = 0;
 
 function QuestionWidget({
     question,
     questionIndex,
     totalQuestions,
     onSubmit,
+    setCorrects,
 }) {
     const questionId = `question__${questionIndex}`;
+    const [questionSelect, setQuestionSelect] = useState(null);
     return (
         <Widget>
             <Widget.Header>
@@ -56,8 +60,11 @@ function QuestionWidget({
                 </p>
 
                 <form
-                    onSubmit={(infosDoEvento) => {
-                        infosDoEvento.preventDefault();
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        if (questionSelect === `alternative__${question.answer}`) {
+                            setCorrects(++contCorrects);
+                        }
                         onSubmit();
                     }}
                 >
@@ -68,6 +75,7 @@ function QuestionWidget({
                                 key={alternativeId}
                                 as="label"
                                 htmlFor={alternativeId}
+                                onClick={() => setQuestionSelect(alternativeId)}
                             >
                                 <input
                                     // style={{ display: 'none' }}
@@ -100,6 +108,7 @@ const screenStates = {
 export default function QuizPage() {
     const [screenState, setScreenState] = React.useState(screenStates.LOADING);
     const totalQuestions = db.questions.length;
+    const [corrects, setCorrects] = React.useState(0);
     const [currentQuestion, setCurrentQuestion] = React.useState(0);
     const questionIndex = currentQuestion;
     const question = db.questions[questionIndex];
@@ -135,12 +144,19 @@ export default function QuizPage() {
                         questionIndex={questionIndex}
                         totalQuestions={totalQuestions}
                         onSubmit={handleSubmitQuiz}
+                        setCorrects={setCorrects}
                     />
                 )}
 
                 {screenState === screenStates.LOADING && <LoadingWidget />}
 
-                {screenState === screenStates.RESULT && <div>Você acertou X questões, parabéns!</div>}
+                {screenState === screenStates.RESULT && (
+                    <div>
+                        {corrects > 0
+                            ? `Você acertou ${corrects} questões. Parabéns!`
+                            : 'Que pena. Você não acertou nenhuma questão.'}
+                    </div>
+                )}
             </QuizContainer>
         </QuizBackground>
     );
